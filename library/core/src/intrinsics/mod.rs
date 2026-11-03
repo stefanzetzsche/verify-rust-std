@@ -4121,7 +4121,7 @@ mod verify {
     }
 
     // Division-first so the check never overflows; a ZST element makes it 0.
-    #[requires(size_of::<E>() == 0 || ptr.len() <= (isize::MAX as usize) / size_of::<E>())]
+    #[requires(crate::mem::size_of::<E>() == 0 || ptr.len() <= (isize::MAX as usize) / crate::mem::size_of::<E>())]
     #[ensures(|result: &usize| *result <= isize::MAX as usize)]
     #[allow(dead_code)]
     unsafe fn size_of_val_slice_wrapper<E>(ptr: *const [E]) -> usize {
@@ -4179,7 +4179,7 @@ mod verify {
         unsafe { align_of_val(ptr) }
     }
 
-    #[requires(size_of::<E>() == 0 || ptr.len() <= (isize::MAX as usize) / size_of::<E>())]
+    #[requires(crate::mem::size_of::<E>() == 0 || ptr.len() <= (isize::MAX as usize) / crate::mem::size_of::<E>())]
     #[ensures(|result: &usize| result.is_power_of_two())]
     #[allow(dead_code)]
     unsafe fn align_of_val_slice_wrapper<E>(ptr: *const [E]) -> usize {
